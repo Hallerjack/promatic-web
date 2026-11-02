@@ -256,6 +256,7 @@ nav {
     letter-spacing: 1px;
     margin-bottom: 20px;
     font-weight: 700;
+    width: fit-content;
 }
 
 .badge {
@@ -311,7 +312,19 @@ nav {
     line-height: 1.2;
 }
 
-/* Problem Grid (Manifiesto) */
+.section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+/* Problem Grid (Filosofia) */
 .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -343,6 +356,7 @@ nav {
     color: #64748b;
     margin-bottom: 0;
 }
+
 
 /* Servicios (Unidades de Negocio) */
 .block-title {
