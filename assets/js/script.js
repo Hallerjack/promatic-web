@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Inicializar AOS (Animate On Scroll)
+    // Inicializar AOS
     if(typeof AOS !== 'undefined') {
         AOS.init({
             once: true,
@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Menú Hamburguesa para Móviles
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
+    const navMenu = document.getElementById('navbar-menu');
 
     if(hamburger) {
         hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            navMenu.classList.toggle('navbar__menu--active');
         });
     }
 
@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            if(navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active'); // Cierra en móvil
+            if(navMenu.classList.contains('navbar__menu--active')) {
+                navMenu.classList.remove('navbar__menu--active'); // Cierra en móvil
             }
 
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            const navbarHeight = document.querySelector('nav').offsetHeight;
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
             
             if (targetElement) {
                 window.scrollTo({
@@ -41,19 +41,15 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Efecto visual en Navbar al hacer scroll
+    // Control de Navbar dinámico en Scroll (Aplicando clases BEM)
     const navbar = document.getElementById('navbar');
-    const navContainer = document.querySelector('.nav-container');
 
     window.addEventListener('scroll', () => {
+        // En lugar de modificar estilos inline, añadimos o removemos un modificador BEM
         if (window.scrollY > 20) {
-            navContainer.style.padding = "10px 24px";
-            navbar.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
-            navbar.style.backdropFilter = "blur(10px)";
+            navbar.classList.add('navbar--scrolled');
         } else {
-            navContainer.style.padding = "15px 24px";
-            navbar.style.backgroundColor = "var(--bg-white)";
-            navbar.style.backdropFilter = "none";
+            navbar.classList.remove('navbar--scrolled');
         }
     });
 });
