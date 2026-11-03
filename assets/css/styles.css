@@ -460,7 +460,7 @@ nav {
 
 .carousel-logo img {
     height: 45px; /* Altura estándar para los logos */
-    width: auto;
+    width: 120px;
     object-fit: contain;
     /* Estilo elegante: grises y un poco transparentes */
     filter: grayscale(100%) opacity(50%); 
