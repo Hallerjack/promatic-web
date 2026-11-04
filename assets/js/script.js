@@ -41,15 +41,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Control de Navbar dinámico en Scroll (Aplicando clases BEM)
+    // Control de Navbar dinámico y Botón Flotante en Scroll
     const navbar = document.getElementById('navbar');
+    const btnUp = document.getElementById('btn-up');
 
     window.addEventListener('scroll', () => {
-        // En lugar de modificar estilos inline, añadimos o removemos un modificador BEM
+        // Lógica Navbar
         if (window.scrollY > 20) {
             navbar.classList.add('navbar--scrolled');
         } else {
             navbar.classList.remove('navbar--scrolled');
+        }
+        
+        // Lógica Botón Volver Arriba (Aparece al bajar 300px)
+        if (btnUp) {
+            if (window.scrollY > 300) {
+                btnUp.classList.add('floating-btn--visible');
+            } else {
+                btnUp.classList.remove('floating-btn--visible');
+            }
         }
     });
 });

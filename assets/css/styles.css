@@ -332,6 +332,65 @@ body {
 .form-group__input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: 6px; background: var(--bg-white); transition: 0.3s; }
 .form-group__input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(89, 184, 217, 0.2); }
 
+/* Botones Flotantes */
+.floating-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.floating-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--bg-white);
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+    color: var(--bg-white);
+}
+
+.floating-btn--whatsapp {
+    background-color: #25D366; /* Verde oficial de WhatsApp */
+}
+
+.floating-btn--whatsapp:hover {
+    background-color: #1ebe57;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.floating-btn--up {
+    background-color: var(--color-primary);
+    font-size: 22px; /* Ícono de flecha ligeramente más pequeño */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+/* Clase modificadora que se añade con JS al hacer scroll */
+.floating-btn--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-btn--up:hover {
+    background-color: #48a0bf;
+    box-shadow: 0 6px 20px rgba(89, 184, 217, 0.4);
+}
+
 /* Footer */
 .footer { background-color: var(--bg-darker); color: #64748b; padding: 60px 0 40px; }
 .footer__logo { width: 180px; height: auto; }
@@ -371,4 +430,8 @@ body {
     .carousel__track { gap: 40px; animation: scroll-carousel 20s linear infinite; }
     .carousel__logo img { height: 30px; filter: grayscale(100%) opacity(70%); }
     .carousel { mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
+
+    .floating-container { bottom: 20px; right: 20px; gap: 10px; }
+    .floating-btn { width: 50px; height: 50px; font-size: 26px; }
+    .floating-btn--up { font-size: 18px; }
 }
