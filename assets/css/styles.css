@@ -444,3 +444,31 @@ body {
 .form-status--success { display: block; background: rgba(157, 196, 58, 0.15); border: 1px solid var(--color-green); color: #3f5a10; }
 .form-status--error { display: block; background: rgba(211, 52, 52, 0.08); border: 1px solid var(--color-red); color: #8f1f1f; }
 .contact-form button[disabled] { opacity: 0.7; cursor: not-allowed; }
+
+
+/* -----------------------------------------------------
+------------------------------------------------------ */
+
+/* 1. Cortar cualquier desborde horizontal en la raíz */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* AOS: contener las animaciones laterales dentro de cada sección */
+.section--dark, .section--light, .section--white, .hero {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
+/* 2. Columnas que no se estiran por su contenido */
+@media (max-width: 1024px) {
+    .split-layout, .impact-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 768px) {
+    .problem-grid, .services-grid { grid-template-columns: minmax(0, 1fr); }
+
+    /* 3. Formulario más compacto en móvil */
+    .contact-form { padding: 24px 16px; }
+    .form-group--captcha { overflow: hidden; }
+}
