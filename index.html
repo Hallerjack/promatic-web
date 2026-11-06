@@ -239,7 +239,7 @@
             </div>
             
             <div class="contact-form-wrapper" data-aos="fade-left">
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensaje enviado. Un consultor se contactará pronto.');">
+                <form class="contact-form" id="contact-form" action="enviar.php" method="POST" novalidate>
                     <div class="form-group">
                         <label class="form-group__label"><i class="fa-regular fa-user form-group__icon"></i> Nombre Completo</label>
                         <input class="form-group__input" type="text" name="nombre" required>
@@ -252,6 +252,15 @@
                         <label class="form-group__label"><i class="fa-regular fa-envelope form-group__icon"></i> Correo Corporativo</label>
                         <input class="form-group__input" type="email" name="correo" required>
                     </div>
+                    <!-- Honeypot anti-spam: debe quedar vacío -->
+                    <div class="form-honeypot" aria-hidden="true">
+                        <label>No completar este campo <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    </div>
+                    <!-- Cloudflare Turnstile: reemplaza TU_SITE_KEY por tu Site Key -->
+                    <div class="form-group form-group--captcha">
+                        <div class="cf-turnstile" data-sitekey="TU_SITE_KEY" data-language="es"></div>
+                    </div>
+                    <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
                     <button type="submit" class="btn btn--primary full-width">Iniciar Consultoría del Proyecto <i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
@@ -280,6 +289,7 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
