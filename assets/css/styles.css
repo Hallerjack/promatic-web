@@ -132,7 +132,7 @@ body {
 }
 
 .navbar__logo {
-    width: 180px;
+    width: 150px;
     height: auto;
     transition: opacity 0.4s ease; /* Fundido suave entre logos */
 }
@@ -157,10 +157,10 @@ body {
     opacity: 1;
 }
 
-/* Aplica un filtro de brillo u oscuridad al logo si es necesario. (opcional, asumiendo logo se ve en ambos) */
+/* Aplica un filtro de brillo u oscuridad al logo si es necesario. (opcional, asumiendo logo se ve en ambos)
 .navbar--scrolled .navbar__logo {
-    /* filter: invert(1); Si el logo es muy blanco y necesitas que sea negro en scroll, se ajusta aqui. */
-}
+    filter: invert(1); Si el logo es muy blanco y necesitas que sea negro en scroll, se ajusta aqui.
+} */
 
 .navbar__menu {
     list-style: none;
