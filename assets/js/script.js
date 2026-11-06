@@ -62,4 +62,64 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
+    // Formulario de contacto (envío a enviar.php con Cloudflare Turnstile)
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const submitBtnHtml = submitBtn.innerHTML;
+
+        const mostrarEstado = (mensaje, tipo) => {
+            formStatus.textContent = mensaje;
+            formStatus.className = 'form-status form-status--' + tipo;
+        };
+
+        const resetTurnstile = () => {
+            if (typeof turnstile !== 'undefined') {
+                turnstile.reset(contactForm.querySelector('.cf-turnstile'));
+            }
+        };
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(contactForm);
+            if (!formData.get('cf-turnstile-response')) {
+                mostrarEstado('Por favor completa la verificación de seguridad.', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Enviando... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                const data = await response.json().catch(() => ({}));
+
+                if (response.ok && data.ok) {
+                    mostrarEstado(data.message || '¡Mensaje enviado! Un consultor se contactará pronto.', 'success');
+                    contactForm.reset();
+                } else {
+                    mostrarEstado(data.message || 'No pudimos enviar tu mensaje. Inténtalo nuevamente.', 'error');
+                }
+            } catch (error) {
+                mostrarEstado('Error de conexión. Revisa tu internet e inténtalo nuevamente.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = submitBtnHtml;
+                resetTurnstile(); // Cada token de Turnstile es de un solo uso
+            }
+        });
+    }
 });
